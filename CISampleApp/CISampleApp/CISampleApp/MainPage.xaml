@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CISampleApp.MainPage"
+             xmlns:local="clr-namespace:CISampleApp"
+             xmlns:converters="clr-namespace:CISampleApp.Converters; assembly=CISampleApp"
+             xmlns:viewModels = "clr-namespace:CISampleApp.ViewModels; assembly=CISampleApp"
+             BindingContext = "{viewModels:MainViewModel}">
+  <ContentPage.Resources>
+    <ResourceDictionary>
+      <converters:BooleanToStringConverter x:Key="booleanToStringCvt"/>
+    </ResourceDictionary>
+  </ContentPage.Resources>
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="5*"/>
+      <RowDefinition Height="1*"/>
+    </Grid.RowDefinitions>
+    <ListView AutomationId="ProductsListView" ItemsSource="{Binding MyProducts}" SeparatorColor="#743385" Grid.Row="0">
+      <ListView.ItemTemplate>
+        <DataTemplate>
+          <ViewCell>
+            <StackLayout BackgroundColor="#AAD7E6"
+            Orientation="Vertical" VerticalOptions="Center" Padding="10">
+              <StackLayout Orientation="Horizontal">
+                <Label Text="{Binding Name}" TextColor="#743385" FontSize="20"/>
+                <Label Text="{Binding IsBought, Converter = {StaticResource booleanToStringCvt}}" HorizontalOptions="EndAndExpand" VerticalTextAlignment="Center" TextColor="#743385" />
+              </StackLayout>
+            </StackLayout>
+          </ViewCell>
+        </DataTemplate>
+      </ListView.ItemTemplate>
+    </ListView>
+    <StackLayout BackgroundColor="#743385" Grid.Row="1" Orientation="Vertical">
+      <Entry AutomationId="ProductNameEntry" TextColor="White" Text="{Binding ProductName}" BackgroundColor="#743385"/>
+      <Button AutomationId="AddProductButton" Text="Add product" BackgroundColor="#AAD7E6" Command="{Binding AddNewProduct}"/>
+    </StackLayout>
+  </Grid>
+
+</ContentPage>

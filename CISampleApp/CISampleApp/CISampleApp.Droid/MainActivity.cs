@@ -21,7 +21,7 @@ namespace CISampleApp.Droid
             base.OnCreate(bundle);
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
-            MobileCenter.Configure("500c78d9-3846-419c-9a18-ac0e924b4739");
+            MobileCenter.Configure("<<YOUR KEY HERE>>");
             LoadApplication(new App());
         }
     }
